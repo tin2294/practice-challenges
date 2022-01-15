@@ -1,12 +1,14 @@
 def french_phone_number?(phone_number)
   # TODO: true or false?
   if phone_number.match?(/-/)
-    phone_number.gsub!(/-/, '')
+    new = phone_number.gsub(/-/, '')
   elsif phone_number.match?(/\s/)
-    phone_number.gsub!(/\s/, '')
+    new = phone_number.gsub(/\s/, '')
+  else
+    new = phone_number
   end
-
-  phone_number.match?(/0[1-9]\d{8}/ || /[+]33[1-9]\d{10}/)
+  # puts new
+  new.match?(/0[1-9]\d{8}/) || new.match?(/[+]33[1-9]\d{8}/)
 end
 
 # - It is valid when starting with a `0` and containing 10 digits. The second digit cannot be a 0.
@@ -14,7 +16,7 @@ end
 
 # The method should ignore spaces or dashes between digits.
 
-puts french_phone_number?("0665363636")
+puts french_phone_number?("+33 6 65 36 36 36")
 #=> true
 
 puts french_phone_number?("07 65 36 36 36")
