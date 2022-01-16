@@ -1,41 +1,42 @@
-def read_file(file)
-  text_file = []
-  File.open(file, "r") do |f|
-    f.each_line do |line|
-      text_file += line.downcase.split
-    end
+file_name = "lib/source-text.txt"
+file_name2 = "lib/stop_words.txt"
+
+def stop_words(file_name2)
+  words = []
+  File.open(file_name2, 'r').each_line do |line|
+    # Do something with the line variable
+    words << line.scan(/.+/)
   end
-  return text_file
+  words.flatten
 end
 
-def read_stop_file(file2)
-  stop_file = []
-  File.open(file2, "r") do |f|
-    f.each_line do |line|
-      stop_file += line.downcase.split
-    end
+# puts stop_words(file_name2)
+
+def read_file(file_name, file_name2)
+  stop = stop_words(file_name2)
+  words = []
+  File.open(file_name, 'r').each_line do |line|
+    # Do something with the line variable
+    words << line.split(/\b/).reject { |word| word.match?(/[^a-zA-Z]+/) }
   end
-  return stop_file
+  words = words.flatten.map(&:downcase)
+  words.reject { |word| stop.include?(word) }
 end
 
-def clean_text_file(text_file)
-  text_file2 = []
-  text_file.each do |word|
-    text_file2 << word.gsub(/'[a-zA-Z]*/, "").chomp('.').chomp(',')
-  end
-  return text_file2
-end
+# read_file(file_name2)
 
 def most_common_words(file_name, stop_words_file_name, number_of_word)
-  stop_file = read_stop_file(stop_words_file_name)
-  text_file = read_file(file_name)
-  text_file2 = clean_text_file(text_file)
-  text_file2 -= stop_file
-  text_file2.delete('-')
-  new_hash = text_file2.tally
-  new_hash2 = {}
-  highest_values = new_hash.values.max(number_of_word)
-  new_hash.select { |k, v| new_hash2[k] = v if highest_values.include?(v) }
+  array = read_file(file_name, stop_words_file_name)
+  hash = Hash.new(0)
+  array.each do |word|
+    if hash.keys.include?(word)
+      hash[word] += 1
+    else
+      hash[word] = 1
+    end
+  end
+  return hash.sort_by { |key, value| value }.last(number_of_word).to_h
+  # TODO: return hash of occurences of number_of_word most frequent words
 end
 
-p most_common_words("spec/obama.txt", "lib/stop_words.txt", 6)
+most_common_words(file_name, file_name2, 6)
