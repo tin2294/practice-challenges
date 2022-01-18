@@ -1,26 +1,43 @@
-def exclude_spaces(text)
-  text.gsub(/\s/, '')
+def paragraph(text)
+  if text.scan(/\n/).length.zero?
+    1
+  else
+    text.scan(/\n/).length.to_f
+  end
+end
+
+def word_count(text)
+  text.split.size
+end
+
+def sentence(text)
+  text.scan(/\./).length
+end
+
+def average_words(text)
+  word_count(text).to_f / sentence(text)
+end
+
+def average_sentences(text)
+  sentence(text).to_f / paragraph(text)
 end
 
 def analyze(text)
   # TODO: should analyze the text, and return the result hash with all features
-  hash = {
+  {
     character_count: text.length,
     character_count_excluding_spaces: text.gsub(/\s/, '').length,
     line_count: text.scan(/$/).length,
-    word_count: text.scan(/\b/).length,
-    sentence_count: text.scan(/\./).length
+    word_count: word_count(text),
+    sentence_count: sentence(text),
+    paragraph_count: paragraph(text),
+    average_words_per_sentence: average_words(text),
+    average_sentences_per_paragraph: average_sentences(text)
   }
-  return hash
 end
 
 
     # paragraph_count:
-    # if text.scan(/\n/).length.zero?
-    #   1.0
-    # else
-    #   text.scan(/\n/).length.to_f
-    # end,
     # average_words_per_sentence: text.scan(/\b/).length / text.scan(/\./).length,
     # average_sentences_per_paragraph: text.scan(/\./).length / (
     # if text.scan(/\n/).length.zero?
