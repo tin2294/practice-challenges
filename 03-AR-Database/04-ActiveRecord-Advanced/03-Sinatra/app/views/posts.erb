@@ -1,0 +1,33 @@
+<h1>Hacker News</h1>
+<br>
+<h3>Add a post</h3>
+<form method="post" action="/posts">
+  <p>
+    <label>Title:   </label> <input name="title" type="text">
+  </p>
+  <p>
+    <label>URL:   </label> <input name="url">
+  </p>
+  <p>
+    <label>Username: </label> <input name="username">
+  </p>
+  <p>
+    <label>Email:   </label> <input name="email">
+  </p>
+  <input type="submit" value="Create">
+</form>
+
+<br>
+<ul>
+<h3>List of Posts</h3>
+  <% @posts.each do |post| %>
+    <li>
+      <a href=<%= post.url %> target="_blank">
+        <%= post.title %> - Votes: <%= post.votes %>
+        <form method="post" action="votes/<%=post.id%>">
+          <input type='submit' class='btn-primary' style='background-color:red; border-color:red' value='Vote!'>
+        </form>
+      </a>
+    </li>
+  <% end %>
+</ul>
