@@ -20,7 +20,18 @@ get '/' do
   # 2. Store these posts in an instance variable
   # 3. Use it in the `app/views/posts.erb` view
   @posts = Post.all
+  @name = "Ting Ting"
   erb :posts # Do not remove this line
+end
+
+get '/ting' do
+  # TODO
+  # 1. fetch posts from database.
+  # 2. Store these posts in an instance variable
+  # 3. Use it in the `app/views/posts.erb` view
+  @posts = Post.all
+  @name = "Ting Ting"
+  erb :ting # Do not remove this line
 end
 
 # TODO: add more routes to your app!

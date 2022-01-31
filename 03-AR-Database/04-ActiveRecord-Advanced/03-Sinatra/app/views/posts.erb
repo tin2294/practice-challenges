@@ -31,3 +31,11 @@
     </li>
   <% end %>
 </ul>
+
+<% @posts.each do |post| %>
+  <h1>
+    <a href="/ting">
+      <%= post.title %>
+    </a>
+  </h1>
+<% end %>
