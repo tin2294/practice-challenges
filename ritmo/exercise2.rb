@@ -28,7 +28,24 @@ def making_sandwiches(tomato, cheese)
   result
 end
 
-tomato_slices = 16
-cheese_slices = 7
+# test 1
+tomato_slices1 = 16
+cheese_slices1 = 7
+puts 'Expect [1,6]'
+p making_sandwiches(tomato_slices1, cheese_slices1)
 
-p making_sandwiches(tomato_slices, cheese_slices)
+puts '----------------------------------------------'
+
+# test 2
+tomato_slices2 = 17
+cheese_slices2 = 4
+puts 'Expect []'
+p making_sandwiches(tomato_slices2, cheese_slices2)
+
+puts '----------------------------------------------'
+
+# test 3
+tomato_slices3 = 4
+cheese_slices3 = 17
+puts 'Expect []'
+p making_sandwiches(tomato_slices3, cheese_slices3)
