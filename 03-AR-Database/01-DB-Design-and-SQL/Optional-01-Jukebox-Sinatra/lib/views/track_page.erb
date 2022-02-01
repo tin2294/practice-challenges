@@ -1,0 +1,18 @@
+<h2>Track Page</h2>
+<% @track_info.each do |data| %>
+  <ul>
+    Title: <%= data[4] %>
+  </ul>
+  <ul>
+    Composer: <%= data[5] %>
+  </ul>
+  <ul>
+    Song Length: <%= (data[6].to_f / 60_000).round(2) %> mins
+  </ul>
+  <ul>
+    Bytes: <%= data[7].to_f.round(2) %> bytes
+  </ul>
+  <ul>
+    Unit Price: <%= data[8].to_f.round(2) %> $
+  </ul>
+<% end %>

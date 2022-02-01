@@ -1,0 +1,6 @@
+<h2>Artists</h2>
+<% @results.each do |song| %>
+  <li>
+    <a href=<%="/artists/#{song[1]}"%>><%= song[0] %></a>
+  </li>
+<% end %>

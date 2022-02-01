@@ -137,7 +137,7 @@ end
 q = [1,2,5,3,7,8,6,4]
 
 minimumBribes(q)
-
+p '------------'
 def minimumBribes(q)
   bribe = 0
   for j in (q.length - 1).downto(0)
@@ -146,7 +146,11 @@ def minimumBribes(q)
       return
     end
 
+    # understand the range of this for
     for i in [q[j]-2, 0].max..j
+      p q[j]
+      p j
+      p'-'
       if q[i] > q[j]
       bribe += 1
       end
@@ -154,3 +158,8 @@ def minimumBribes(q)
   end
   puts bribe
 end
+
+
+q = [1,2,5,3,7,8,6,4]
+
+minimumBribes(q)

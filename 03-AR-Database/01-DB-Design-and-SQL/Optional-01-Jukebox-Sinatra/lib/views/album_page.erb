@@ -1,0 +1,7 @@
+<h2>Album Page</h2>
+<h3>Tracks</h3>
+<% @tracks.each do |track| %>
+  <li>
+    <a href=<%="/tracks/#{track[1]}"%>><%= track[0] %></a>
+  </li>
+<% end %>
