@@ -112,7 +112,7 @@ def prune_hash(hash, total_debt)
       if hash[i].length == 1
         final_hash[i] = hash[i][0]
       else
-        pending = hash[i].sum { |it| it.last }
+        pending = hash[i].sum(&:last)
         final_hash[i] = [hash[i].flatten.first, pending]
       end
     else
