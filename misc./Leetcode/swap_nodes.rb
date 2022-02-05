@@ -1,21 +1,25 @@
 def swap_pairs(head)
-    return [] if head.nil?
-    return head if head.next.nil?
-
-    first = head
-    second = head.next
-    p first.val.to_s + " " + second.val.to_s
-    third = head.next.next
-    p third
-
-    head = second
-    head.next = first
-    head.next.next = third
-    head.next.next = swap_pairs(head.next.next) unless head.next.next.nil?
-
-    return head
+  head_final = []
+  indices = []
+  head.each do |number|
+    index = head.index(number)
+    if index < (head.length - 1)
+      if indices.include?(index)
+      else
+        indices << index
+        indices << index + 1
+        head_final << head[index + 1]
+        head_final << number
+      end
+    elsif (head.length % 2) != 0
+      head_final << head.last
+    end
+  end
+  head_final
 end
 
 head = [1,2,3,4]
 
 p swap_pairs(head)
+
+# linked lists?
