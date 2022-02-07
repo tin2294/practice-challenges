@@ -10,18 +10,34 @@ end
 # @return {ListNode}
 
 def swap_pairs(head)
-  dummy = ListNode.new(nil)
-  dummy.next = head
-  prev = dummy
-  while !head.nil? && !head.next.nil?
-    nxt = head.next
-    head.next = nxt.next
-    nxt.next = head
-    prev.next = nxt
-    prev = head
-    head = head.next
-  end
-  return dummy.next
+  # dummy = ListNode.new(nil)
+  # dummy.next = head
+  # prev = dummy
+  # while !head.nil? && !head.next.nil?
+  #   nxt = head.next
+  #   head.next = nxt.next
+  #   nxt.next = head
+  #   prev.next = nxt
+  #   prev = head
+  #   head = head.next
+  # end
+  # return dummy.next
+
+  return [] if head.nil?
+  return head if head.next.nil?
+
+  first = head
+  second = head.next
+  p first.val.to_s + " " + second.val.to_s
+  third = head.next.next
+  p third
+
+  head = second
+  head.next = first
+  head.next.next = third
+  head.next.next = swap_pairs(head.next.next) unless head.next.next.nil?
+
+  return head
 end
 
 head = ListNode.new(1, ListNode.new(2, ListNode.new(3, ListNode.new(4))))
