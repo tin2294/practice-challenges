@@ -13,34 +13,39 @@ end
 root = TreeNode.new(1, nil, TreeNode.new(0, TreeNode.new(0,nil,nil), TreeNode.new(1, nil, nil)))
 
 def mini_tree_pruning(tree)
-  unless tree == nil
-    # make left and right blocks
-    if (tree.left == 0 || tree.left == nil) && (tree.right == 0 || tree.right == nil) && tree.val == 0
-      tree = nil
-    elsif (tree.left == 0 || tree.left == nil) && (tree.right == 0 || tree.right == nil) && tree.val == 1
-      tree.val = 1
-    elsif (tree.left == 0 || tree.left == nil) && (tree.right == 0 || tree.right == nil)
-     tree = nil
-    elsif tree.left == 0
-      tree.left = nil
-    elsif tree.right == 0
-      tree.right = nil
-    elsif tree.left.class == TreeNode
-      tree.left = mini_tree_pruning(tree.left)
-    elsif tree.right.class == TreeNode
-      tree.right = mini_tree_pruning(tree.right)
-    end
-  end
-  return tree
+  # unless tree == nil
+  #   # make left and right blocks
+  #   if (tree.left == 0 || tree.left == nil) && (tree.right == 0 || tree.right == nil) && tree.val == 0
+  #     tree = nil
+  #   elsif (tree.left == 0 || tree.left == nil) && (tree.right == 0 || tree.right == nil) && tree.val == 1
+  #     tree.val = 1
+  #   elsif (tree.left == 0 || tree.left == nil) && (tree.right == 0 || tree.right == nil)
+  #    tree = nil
+  #   elsif tree.left == 0
+  #     tree.left = nil
+  #   elsif tree.right == 0
+  #     tree.right = nil
+  #   elsif tree.left.class == TreeNode
+  #     tree.left = mini_tree_pruning(tree.left)
+  #   elsif tree.right.class == TreeNode
+  #     tree.right = mini_tree_pruning(tree.right)
+  #   end
+  # end
+  # return tree
 end
 
 def prune_tree(root)
-  final_tree = TreeNode.new(root.val)
-  left = mini_tree_pruning(root.left)
-  right = mini_tree_pruning(root.right)
-  final_tree.left = left
-  final_tree.right = right
-  return final_tree
+    return nil if root==nil
+    root.left=prune_tree(root.left) #keeps pruning left until it returns nil
+    root.right=prune_tree(root.right)
+    return nil if root.val==0 and root.left==nil and root.right==nil
+    return root
+  # final_tree = TreeNode.new(root.val)
+  # left = mini_tree_pruning(root.left)
+  # right = mini_tree_pruning(root.right)
+  # final_tree.left = left
+  # final_tree.right = right
+  # return final_tree
 end
 
 p prune_tree(root)
