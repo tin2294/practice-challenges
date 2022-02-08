@@ -36,7 +36,7 @@ end
 
 def prune_tree(root)
     return nil if root==nil
-    root.left=prune_tree(root.left) #keeps pruning left until it returns nil
+    root.left=prune_tree(root.left) #keeps pruning left until there is no left?
     root.right=prune_tree(root.right)
     return nil if root.val==0 and root.left==nil and root.right==nil
     return root
